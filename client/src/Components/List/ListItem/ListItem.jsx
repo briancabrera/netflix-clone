@@ -2,26 +2,24 @@ import { PlayArrow, Add, ThumbUpAltOutlined, ThumbDownOutlined } from '@material
 import React from 'react'
 import "./listitem.scss"
 
-export default function ListItem({index}) {
+export default function ListItem({index, item}) {
 
     const [Hovered, setHovered] = React.useState(false)
     const trailer = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
 
     return (
         <div className="listItem"
-            onMouseEnter={() => {setHovered(true) 
-                console.log(Hovered)}}
-            onMouseLeave={() => {setHovered(false) 
-                console.log(Hovered)}}
+            onMouseEnter={() => {setHovered(true)}}
+            onMouseLeave={() => {setHovered(false)}}
             style={{left: Hovered && index * 225 - 50 + index * 2.5}}
         >
             
-            <img src="https://images5.alphacoders.com/651/651109.jpg" alt="" />
+            <img src={item.img} alt="" />
             
             {
                 Hovered && (
             <>
-                <video src={trailer} autoPlay loop></video>
+                <video src={item.trailer} autoPlay loop></video>
 
             <div className="itemInfo">
                 <div className="icons">
@@ -31,16 +29,15 @@ export default function ListItem({index}) {
                     <ThumbDownOutlined className="icon"/>
                 </div>
                 <div className="itemInfoTop">
-                    <span>2 hours 36 mins</span>
-                    <span className="classified">+16</span>
-                    <span>2016</span>
+                    <span>{item.duration}</span>
+                    <span className="classified">{item.classification}</span>
+                    <span>{item.year}</span>
                 </div>
                 <div className="desc">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                    {item.description}
                 </div>
                 <div className="genre">
-                    Thriller
+                    {item.genre}
                 </div>
             </div>
             </>
